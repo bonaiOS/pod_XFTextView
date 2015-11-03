@@ -1,0 +1,9 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+
+target 'pod_XFTextView_Tests', :exclusive => true do
+  pod "pod_XFTextView", :path => "../"
+
+  
+end
