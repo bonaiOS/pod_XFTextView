@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIPanGestureRecognizer *singleFingerPanRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *doubleFingerPanRecognizer;
 @property (nonatomic, assign) NSRange startRange;
+@property (nonatomic,strong) NSString * str_placeholder;//placeholder
 
 @end
 
@@ -24,16 +25,19 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        self.TV = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        self.TV.text = placeholder;
-        self.TV.textColor = [UIColor colorWithRed:212/255.0 green:212/255.0 blue:214/255.0 alpha:1];
-        self.TV.font = [UIFont systemFontOfSize:15];
-        self.TV.backgroundColor = [UIColor clearColor];
-        self.TV.editable = NO;
-        [self addSubview:self.TV];
-        [self sendSubviewToBack:self.TV];
+
+        self.str_placeholder=placeholder;
+        self.lab_placeholder=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, 25)];
+        self.lab_placeholder.font= [UIFont systemFontOfSize:15];
+        self.lab_placeholder.text = placeholder;
+        self.lab_placeholder.textColor=[UIColor grayColor];
+        self.lab_placeholder.enabled = NO;//lable必须设置为不可用
+        self.lab_placeholder.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.lab_placeholder];
+        [self sendSubviewToBack:self.lab_placeholder];
+        
         self.delegate = self;
+      
         _singleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleFingerPanHappend:)];
         _singleFingerPanRecognizer.maximumNumberOfTouches = 1;
         [self addGestureRecognizer:_singleFingerPanRecognizer];
@@ -44,33 +48,6 @@
     }
     return self;
 }
-
-- (void)textViewDidChange:(UITextView *)textView {
-    if (self.text.length == 0) {
-        self.TV.hidden = NO;
-    }
-    else {
-        self.TV.hidden = YES;
-    }
-}
-
-
-//- (id)init
-//{
-//    self = [super init];
-//    if (self) {
-//        _singleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleFingerPanHappend:)];
-//        _singleFingerPanRecognizer.maximumNumberOfTouches = 1;
-//        [self addGestureRecognizer:_singleFingerPanRecognizer];
-//    
-//        _doubleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doubleFingerPanHappend:)];
-//        _doubleFingerPanRecognizer.minimumNumberOfTouches = 2;
-//        [self addGestureRecognizer:_doubleFingerPanRecognizer];
-//
-//    }
-//    return self;
-//}
-
 
 
 
@@ -114,13 +91,20 @@
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
+    //    if ([text isEqualToString:@"\n"]) {
+    //        [textView resignFirstResponder];
+    //        return NO;
+    //    }
     return YES;
 }
-
+- (void)textViewDidChange:(UITextView *)textView{
+    if (self.text.length==0) {
+        self.lab_placeholder.hidden=NO;
+    }
+    else{
+        self.lab_placeholder.hidden=YES;
+    }
+}
 
 
 @end

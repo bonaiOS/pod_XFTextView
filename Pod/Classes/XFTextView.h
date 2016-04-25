@@ -13,8 +13,7 @@
 - (void)requireGestureRecognizerToFail:(UIGestureRecognizer*)gestureRecognizer;
 
 @property (nonatomic) NSString *placeholder;
-
-@property(nonatomic,strong) UITextView *TV;
+@property(nonatomic,strong) UILabel *lab_placeholder;
 
 - (id)initWithFrame:(CGRect)frame placeholder:(NSString *)placeholder;
 
