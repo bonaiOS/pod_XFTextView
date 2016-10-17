@@ -10,7 +10,7 @@
 
 @interface XFTextView : UITextView<UITextViewDelegate>
 
-- (void)requireGestureRecognizerToFail:(UIGestureRecognizer*)gestureRecognizer;
+//- (void)requireGestureRecognizerToFail:(UIGestureRecognizer*)gestureRecognizer;
 
 @property (nonatomic) NSString *placeholder;
 @property(nonatomic,strong) UILabel *lab_placeholder;

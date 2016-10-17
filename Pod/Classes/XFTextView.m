@@ -38,56 +38,56 @@
         
         self.delegate = self;
       
-        _singleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleFingerPanHappend:)];
-        _singleFingerPanRecognizer.maximumNumberOfTouches = 1;
-        [self addGestureRecognizer:_singleFingerPanRecognizer];
-        
-        _doubleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doubleFingerPanHappend:)];
-        _doubleFingerPanRecognizer.minimumNumberOfTouches = 2;
-        [self addGestureRecognizer:_doubleFingerPanRecognizer];
+//        _singleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleFingerPanHappend:)];
+//        _singleFingerPanRecognizer.maximumNumberOfTouches = 1;
+//        [self addGestureRecognizer:_singleFingerPanRecognizer];
+//        
+//        _doubleFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doubleFingerPanHappend:)];
+//        _doubleFingerPanRecognizer.minimumNumberOfTouches = 2;
+//        [self addGestureRecognizer:_doubleFingerPanRecognizer];
     }
     return self;
 }
 
 
 
-- (void)requireGestureRecognizerToFail:(UIGestureRecognizer*)gestureRecognizer
-{
-    [self.singleFingerPanRecognizer requireGestureRecognizerToFail:gestureRecognizer];
-    [self.doubleFingerPanRecognizer requireGestureRecognizerToFail:gestureRecognizer];
-}
-
-- (void)singleFingerPanHappend:(UIPanGestureRecognizer*)sender
-{
-    if (sender.state == UIGestureRecognizerStateBegan)
-    {
-        self.startRange = self.selectedRange;
-    }
-    
-    CGFloat cursorLocation = MAX(self.startRange.location+(NSInteger)([sender translationInView:self].x*kCursorVelocity), 0);
-    NSRange selectedRange = {cursorLocation, 0};
-    self.selectedRange = selectedRange;
-}
-
-- (void)doubleFingerPanHappend:(UIPanGestureRecognizer*)sender
-{
-    if (sender.state == UIGestureRecognizerStateBegan)
-    {
-        self.startRange = self.selectedRange;
-    }
-    
-    CGFloat cursorLocation = MAX(self.startRange.location+(NSInteger)([sender translationInView:self].x*kCursorVelocity), 0);
-    NSRange selectedRange;
-    if (cursorLocation > self.startRange.location)
-    {
-        selectedRange = NSMakeRange(self.startRange.location, fabs(self.startRange.location-cursorLocation));
-    }
-    else
-    {
-        selectedRange = NSMakeRange(cursorLocation, fabs(self.startRange.location-cursorLocation));
-    }
-    self.selectedRange = selectedRange;
-}
+//- (void)requireGestureRecognizerToFail:(UIGestureRecognizer*)gestureRecognizer
+//{
+//    [self.singleFingerPanRecognizer requireGestureRecognizerToFail:gestureRecognizer];
+//    [self.doubleFingerPanRecognizer requireGestureRecognizerToFail:gestureRecognizer];
+//}
+//
+//- (void)singleFingerPanHappend:(UIPanGestureRecognizer*)sender
+//{
+//    if (sender.state == UIGestureRecognizerStateBegan)
+//    {
+//        self.startRange = self.selectedRange;
+//    }
+//    
+//    CGFloat cursorLocation = MAX(self.startRange.location+(NSInteger)([sender translationInView:self].x*kCursorVelocity), 0);
+//    NSRange selectedRange = {cursorLocation, 0};
+//    self.selectedRange = selectedRange;
+//}
+//
+//- (void)doubleFingerPanHappend:(UIPanGestureRecognizer*)sender
+//{
+//    if (sender.state == UIGestureRecognizerStateBegan)
+//    {
+//        self.startRange = self.selectedRange;
+//    }
+//    
+//    CGFloat cursorLocation = MAX(self.startRange.location+(NSInteger)([sender translationInView:self].x*kCursorVelocity), 0);
+//    NSRange selectedRange;
+//    if (cursorLocation > self.startRange.location)
+//    {
+//        selectedRange = NSMakeRange(self.startRange.location, fabs(self.startRange.location-cursorLocation));
+//    }
+//    else
+//    {
+//        selectedRange = NSMakeRange(cursorLocation, fabs(self.startRange.location-cursorLocation));
+//    }
+//    self.selectedRange = selectedRange;
+//}
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
