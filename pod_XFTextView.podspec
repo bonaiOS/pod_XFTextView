@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "pod_XFTextView"
-  s.version          = “0.1.3”
+  s.version          = "0.1.3"
   s.summary          = "A short description of pod_XFTextView."
 
 # This description is used to generate tags and improve search results.
